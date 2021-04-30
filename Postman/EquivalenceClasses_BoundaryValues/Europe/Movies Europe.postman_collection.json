@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "767c5a5c-d01b-48f0-ae71-a049245767d3",
+		"name": "Movies Europe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "age_europe Equivalence classes & Boundary values",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"   let agE = pm.request.body.formdata.get(\"age\") \r",
+							"    \r",
+							"    if (agE >= 0 && agE <= 17) {\r",
+							"        pm.test(\"Возраст \" + agE + \" входит в группу underage\", function () {\r",
+							"        pm.expect(pm.response.json().age_type).to.eql(\"underage\");\r",
+							"        })\r",
+							"    } else if (agE >= 18 && agE <= 49) {\r",
+							"        pm.test(\"Возраст \" + agE + \" входит в группу adult\", function () {\r",
+							"        pm.expect(pm.response.json().age_type).to.eql(\"adult\");\r",
+							"        })\r",
+							"    } else if (agE >= 50 && agE <= 100) {  \r",
+							"        pm.test(\"Возраст \" + agE + \" входит в группу antiquity\", function () {\r",
+							"        pm.expect(pm.response.json().age_type).to.eql(\"antiquity\");\r",
+							"        })\r",
+							"     } else {\r",
+							"         pm.test(\"Значение \" + agE + \" входит в класс эквивалентности (-Infinity; 0) либо (100; +Infinity)\", function () {\r",
+							"        pm.response.to.have.status(500);\r",
+							"        })  \r",
+							"    }\r",
+							"    \r",
+							"    \r",
+							"\r",
+							"\r",
+							"    \r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "{{age}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "116.203.27.46:5002/age_europe",
+					"host": [
+						"116",
+						"203",
+						"27",
+						"46"
+					],
+					"port": "5002",
+					"path": [
+						"age_europe"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
